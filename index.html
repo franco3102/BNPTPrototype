@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark" data-lte-color-mode="off">
+<head>
+  <meta charset="UTF-8" />
+  <title>IPDR Operations Dashboard | BNPT IPDR</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/styles/overlayscrollbars.min.css" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" crossorigin="anonymous" />
+  <link rel="stylesheet" href="css/adminlte.min.css" />
+  <link rel="stylesheet" href="css/bnpt-theme.css" />
+  
+</head>
+<body class="layout-fixed sidebar-expand-lg">
+  <div class="app-wrapper">
+    <div id="app-header-slot"></div>
+    <div id="app-sidebar-slot"></div>
+
+    <main class="app-main">
+      <div class="app-content-header">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-6">
+              <h1 class="mb-0 fs-3">IPDR Operations Dashboard</h1>
+            </div>
+            <div class="col-sm-6">
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb float-sm-end">
+                  <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">IPDR Operations Dashboard</li>
+                </ol>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="app-content">
+        <div class="container-fluid py-3">
+
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <div>
+              <h6 class="fw-bold mb-0">IPDR Data Flow Monitoring</h6>
+              <small class="text-secondary">Telco Kafka Stream &rarr; IPDR Data Lake &rarr; Customer Site (BNPT)</small>
+            </div>
+            <span class="badge text-bg-success bg-opacity-25 text-success border border-success border-opacity-25">
+              <i class="bi bi-check-circle-fill me-1"></i> System Health: Optimal
+            </span>
+          </div>
+
+          <div class="row g-3 mb-3">
+            <div class="col-xl-3 col-md-6">
+              <div class="stat-card border-info">
+                <div class="stat-label">Live Streams</div>
+                <div class="stat-value">4,180</div>
+                <div class="stat-sub">Active source connections</div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+              <div class="stat-card">
+                <div class="stat-label">Data Rate</div>
+                <div class="stat-value">12.5 <span class="fs-6 text-secondary fw-normal">TB/h</span></div>
+                <div class="stat-sub">Inbound from telecom operator</div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+              <div class="stat-card border-warning">
+                <div class="stat-label">Processed Today</div>
+                <div class="stat-value">24.2 <span class="fs-6 text-secondary fw-normal">TB</span></div>
+                <div class="stat-sub">Retention: 90 days</div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+              <div class="stat-card border-success">
+                <div class="stat-label">Query Speed</div>
+                <div class="stat-value">&lt;50 <span class="fs-6 text-secondary fw-normal">ms</span></div>
+                <div class="stat-sub">3,950 active users &middot; 6.8 TB usage</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mb-3">
+            <div class="card-body">
+              <h6 class="fw-bold mb-3">Data Flow Path</h6>
+              <div class="flow-strip">
+                <div class="flow-node">
+                  <div class="flow-icon"><i class="bi bi-broadcast-pin"></i></div>
+                  <div class="flow-title">Telecom Operator</div>
+                  <div class="flow-sub">Core network user session data</div>
+                </div>
+                <div class="flow-arrow"><i class="bi bi-arrow-right"></i></div>
+                <div class="flow-node flow-center">
+                  <div class="flow-icon" style="color: var(--bnpt-accent-cyan);"><i class="bi bi-hdd-stack-fill"></i></div>
+                  <div class="flow-title">IPDR Data Lake</div>
+                  <div class="flow-sub">Storage &middot; Processing &middot; Analysis</div>
+                </div>
+                <div class="flow-arrow"><i class="bi bi-arrow-right"></i></div>
+                <div class="flow-node">
+                  <div class="flow-icon"><i class="bi bi-building-fill"></i></div>
+                  <div class="flow-title">Customer Site</div>
+                  <div class="flow-sub">BNPT network analytics</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <h6 class="fw-bold mb-2 text-secondary fs-13 text-uppercase">Fitur Utama</h6>
+          <div class="row g-3">
+            <div class="col-md-3 col-6">
+              <a href="pages/whitelist.html" class="feature-link-card">
+                <div class="fl-icon bg-primary bg-opacity-25 text-primary"><i class="bi bi-list-check"></i></div>
+                <div class="fl-title">MSISDN Whitelist</div>
+                <!-- <div class="fl-desc">Management &amp; quota</div> -->
+              </a>
+            </div>
+            <div class="col-md-3 col-6">
+              <a href="pages/change-mgmt.html" class="feature-link-card">
+                <div class="fl-icon bg-warning bg-opacity-25 text-warning"><i class="bi bi-diagram-3-fill"></i></div>
+                <div class="fl-title">Scheduled Change</div>
+                <!-- <div class="fl-desc">Management workflow</div> -->
+              </a>
+            </div>
+            <div class="col-md-3 col-6">
+              <a href="pages/processing.html" class="feature-link-card">
+                <div class="fl-icon bg-info bg-opacity-25 text-info"><i class="bi bi-broadcast"></i></div>
+                <div class="fl-title">IPDR Processing</div>
+                <!-- <div class="fl-desc">Monitoring</div> -->
+              </a>
+            </div>
+            <div class="col-md-3 col-6">
+              <a href="pages/sftp.html" class="feature-link-card">
+                <div class="fl-icon bg-success bg-opacity-25 text-success"><i class="bi bi-send-fill"></i></div>
+                <div class="fl-title">SFTP Delivery</div>
+                <!-- <div class="fl-desc">Monitoring</div> -->
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="app-footer">
+        <strong>BNPT IPDR Vector Filtering Engine &copy; 2026.</strong> Built on AdminLTE 4.
+      </footer>
+    </main>
+  </div>
+
+
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/browser/overlayscrollbars.browser.es6.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+  <script src="js/adminlte.min.js"></script>
+  <script>window.BNPT_PAGE = { key: 'dashboard', depth: 0 };</script>
+  <script src="js/layout.js"></script>
+  <script src="js/permissions.js"></script>
+  
+</body>
+</html>

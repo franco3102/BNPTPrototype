@@ -1,0 +1,30 @@
+<aside class="app-sidebar shadow" data-bs-theme="dark">
+  <div class="sidebar-brand">
+    <a href="__DASHBOARD_HREF__" class="brand-link">
+      <i class="bi bi-shield-lock-fill fs-4 text-primary ms-1 me-2"></i>
+      <span class="brand-text">BNPT IPDR</span>
+    </a>
+  </div>
+
+  <div class="sidebar-search" role="search">
+    <label for="sidebar-search-input" class="visually-hidden">Filter menu</label>
+    <input type="search" id="sidebar-search-input" class="form-control form-control-sm" placeholder="Filter menu..." autocomplete="off" data-lte-toggle="sidebar-search" data-lte-target="#navigation" />
+    <p class="fs-7 text-secondary mt-2 mb-0" data-lte-search-empty role="status" hidden>No matching pages.</p>
+  </div>
+
+  <div class="sidebar-wrapper">
+    <nav class="mt-2" aria-label="Main navigation">
+      <ul class="nav sidebar-menu flex-column" id="navigation">
+        __NAV_ITEMS__
+      </ul>
+    </nav>
+  </div>
+
+  <div class="sidebar-footer-widget">
+    <div class="d-flex align-items-center justify-content-between text-secondary fs-12 mb-1">
+      <span>Engine Node</span>
+      <span class="badge text-bg-success bg-opacity-25 text-success">Active</span>
+    </div>
+    <div class="code-font text-light fs-12">node-nest-kafka-01</div>
+  </div>
+</aside>

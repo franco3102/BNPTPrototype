@@ -1,0 +1,253 @@
+/* ============================================================
+   BNPT IPDR — Cyber Theme for AdminLTE 4
+   Reskins AdminLTE's dark mode to match the BNPT IPDR Vector
+   Filtering Engine reference dashboard while keeping every
+   AdminLTE structural class (app-header, app-sidebar, card,
+   info-box, table, modal, toast, ...) intact.
+   ============================================================ */
+
+:root, [data-bs-theme="dark"] {
+    --bnpt-bg: #0b0f19;
+    --bnpt-sidebar-bg: #0d1322;
+    --bnpt-card-bg: #111827;
+    --bnpt-card-border: #1f2937;
+    --bnpt-accent-blue: #3b82f6;
+    --bnpt-accent-cyan: #06b6d4;
+    --bnpt-accent-green: #10b981;
+    --bnpt-accent-red: #ef4444;
+    --bnpt-accent-warning: #f59e0b;
+    --bnpt-text-muted: #9ca3af;
+    --bnpt-text-light: #f3f4f6;
+
+    --bs-body-bg: var(--bnpt-bg);
+    --bs-body-color: var(--bnpt-text-light);
+    --bs-border-color: var(--bnpt-card-border);
+    --bs-primary: var(--bnpt-accent-blue);
+    --bs-secondary-color: var(--bnpt-text-muted);
+    --bs-tertiary-bg: var(--bnpt-card-bg);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bnpt-bg);
+    color: var(--bnpt-text-light);
+}
+
+.code-font { font-family: 'JetBrains Mono', monospace; }
+
+/* ---- Header ---- */
+.app-header.navbar {
+    background-color: rgba(11, 15, 25, 0.92) !important;
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--bnpt-card-border);
+}
+.app-header .nav-link { color: var(--bnpt-text-light); }
+
+.health-pill {
+    background-color: var(--bnpt-card-bg);
+    border: 1px solid var(--bnpt-card-border);
+    border-radius: 50rem;
+    padding: 0.3rem 0.9rem;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+}
+
+/* ---- Sidebar ---- */
+.app-sidebar {
+    background-color: var(--bnpt-sidebar-bg) !important;
+    border-right: 1px solid var(--bnpt-card-border);
+}
+.app-sidebar .sidebar-brand { border-bottom: 1px solid rgba(255,255,255,0.08); }
+.app-sidebar .brand-text { color: #fff; font-weight: 700; }
+.app-sidebar .nav-sidebar > .nav-item > .nav-link {
+    color: var(--bnpt-text-muted);
+    border-left: 3px solid transparent;
+    border-radius: 0;
+}
+.app-sidebar .nav-sidebar > .nav-item > .nav-link:hover,
+.app-sidebar .nav-sidebar > .nav-item > .nav-link.active {
+    color: #fff;
+    background: rgba(59, 130, 246, 0.08);
+    border-left-color: var(--bnpt-accent-blue);
+}
+.sidebar-footer-widget {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 0.85rem 1rem;
+}
+
+/* ---- Cards / Info boxes ---- */
+.card {
+    background-color: var(--bnpt-card-bg);
+    border: 1px solid var(--bnpt-card-border);
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+.card-header { background-color: transparent; border-bottom: 1px solid var(--bnpt-card-border); }
+
+.metric-box {
+    background-color: var(--bnpt-card-bg);
+    border: 1px solid var(--bnpt-card-border);
+    border-radius: 10px;
+    padding: 1rem;
+    transition: border-color .2s ease;
+}
+.metric-box:hover { border-color: #374151; }
+.metric-icon {
+    width: 48px; height: 48px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.25rem;
+}
+
+/* ---- Status dots ---- */
+.status-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    display: inline-block; margin-right: 6px;
+}
+.status-dot.active { background-color: var(--bnpt-accent-green); box-shadow: 0 0 10px var(--bnpt-accent-green); }
+.pulse-live { animation: bnpt-pulse 1.5s infinite; }
+@keyframes bnpt-pulse { 0%{opacity:1;} 50%{opacity:.4;} 100%{opacity:1;} }
+
+/* ---- Tables ---- */
+.table { color: var(--bnpt-text-light); vertical-align: middle; }
+.table > thead {
+    background-color: #162032; color: var(--bnpt-text-muted);
+    font-weight: 600; font-size: .78rem; text-transform: uppercase; letter-spacing: .5px;
+}
+.table > :not(caption) > * > * { background-color: var(--bnpt-card-bg); border-bottom-color: var(--bnpt-card-border); }
+
+/* ---- Terminal console ---- */
+.terminal-box {
+    background-color: #050811;
+    border: 1px solid #1e293b;
+    border-radius: 8px;
+    height: 380px;
+    overflow-y: auto;
+    padding: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .82rem;
+}
+.terminal-line { margin-bottom: 6px; line-height: 1.4; display: flex; gap: 10px; }
+
+/* ---- Redis chips ---- */
+.redis-key-chip {
+    background: rgba(16, 185, 129, .1);
+    border: 1px solid rgba(10, 148, 102, .4);
+    color: #34d399;
+    padding: 6px 12px; border-radius: 6px;
+    font-size: .85rem; display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* ---- Misc ---- */
+.form-control, .form-select {
+    background-color: #0b0f19; color: var(--bnpt-text-light); border-color: var(--bnpt-card-border);
+}
+.form-control:focus { background-color: #0b0f19; color: #fff; border-color: var(--bnpt-accent-blue); box-shadow: 0 0 0 .2rem rgba(59,130,246,.2); }
+.modal-content { background-color: var(--bnpt-card-bg); border: 1px solid var(--bnpt-card-border); color: var(--bnpt-text-light); }
+.app-footer { background-color: var(--bnpt-bg); border-top: 1px solid var(--bnpt-card-border); color: var(--bnpt-text-muted); }
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bnpt-bg); }
+::-webkit-scrollbar-thumb { background: var(--bnpt-card-border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #374151; }
+
+.fs-11 { font-size: .68rem; } .fs-12 { font-size: .75rem; } .fs-13 { font-size: .81rem; }
+
+/* ---- Multi-page extras ---- */
+.breadcrumb-item a { color: var(--bnpt-accent-blue); text-decoration: none; }
+.breadcrumb-item.active { color: var(--bnpt-text-muted); }
+.app-content-header h1 { color: #fff; }
+.dropdown-menu { background-color: var(--bnpt-card-bg); border: 1px solid var(--bnpt-card-border); }
+.dropdown-item { color: var(--bnpt-text-light); }
+.dropdown-item:hover, .dropdown-item:focus { background-color: rgba(59,130,246,.12); color: #fff; }
+.dropdown-divider { border-color: var(--bnpt-card-border); }
+.sidebar-search .form-control { background-color: #0b0f19; border-color: var(--bnpt-card-border); color: #fff; }
+.navbar-search-field .form-control { background-color: #0b0f19; border-color: var(--bnpt-card-border); color: #fff; }
+
+/* ---- Stat cards with colored left border (whitelist quota, KPIs) ---- */
+.stat-card {
+    background-color: var(--bnpt-card-bg);
+    border: 1px solid var(--bnpt-card-border);
+    border-left: 4px solid var(--bnpt-accent-blue);
+    border-radius: 8px;
+    padding: 1rem 1.1rem;
+}
+.stat-card.border-info { border-left-color: var(--bnpt-accent-cyan); }
+.stat-card.border-warning { border-left-color: var(--bnpt-accent-warning); }
+.stat-card.border-danger { border-left-color: var(--bnpt-accent-red); }
+.stat-card.border-success { border-left-color: var(--bnpt-accent-green); }
+.stat-card .stat-label { font-size: .72rem; text-transform: uppercase; letter-spacing: .5px; color: var(--bnpt-text-muted); font-weight: 600; }
+.stat-card .stat-value { font-size: 1.7rem; font-weight: 700; color: #fff; margin-top: .15rem; }
+.stat-card .stat-sub { font-size: .72rem; color: var(--bnpt-text-muted); }
+
+.quota-bar-track { background-color: #1f2937; border-radius: 50rem; height: 6px; overflow: hidden; margin-top: .5rem; }
+.quota-bar-fill { background-color: var(--bnpt-accent-blue); height: 100%; border-radius: 50rem; }
+
+/* ---- Feature link cards (dashboard quick links) ---- */
+.feature-link-card {
+    background-color: var(--bnpt-card-bg);
+    border: 1px solid var(--bnpt-card-border);
+    border-radius: 8px;
+    padding: 1rem;
+    text-decoration: none;
+    display: block;
+    transition: border-color .15s ease, transform .15s ease;
+}
+.feature-link-card:hover { border-color: var(--bnpt-accent-blue); transform: translateY(-2px); }
+.feature-link-card .fl-icon { width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; margin-bottom: .6rem; }
+.feature-link-card .fl-title { color: #fff; font-weight: 600; font-size: .92rem; }
+.feature-link-card .fl-desc { color: var(--bnpt-text-muted); font-size: .78rem; }
+
+/* ---- Flow strip (Telecom Operator -> Transform -> Customer Site) ---- */
+.flow-strip { display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
+.flow-node { flex: 1; text-align: center; padding: 1rem .5rem; border: 1px solid var(--bnpt-card-border); border-radius: 8px; background-color: #0d1322; }
+.flow-node .flow-icon { font-size: 1.6rem; color: var(--bnpt-accent-blue); margin-bottom: .4rem; }
+.flow-node.flow-center { border-color: var(--bnpt-accent-cyan); box-shadow: 0 0 0 1px rgba(6,182,212,.25); }
+.flow-node .flow-title { font-size: .82rem; font-weight: 600; color: #fff; }
+.flow-node .flow-sub { font-size: .7rem; color: var(--bnpt-text-muted); }
+.flow-arrow { color: var(--bnpt-text-muted); font-size: 1.1rem; flex: 0 0 auto; }
+
+/* ---- Workflow stepper (7-step approval) ---- */
+.workflow-stepper { position: relative; padding-left: 42px; }
+.workflow-stepper::before {
+    content: ""; position: absolute; left: 15px; top: 16px; bottom: 16px; width: 2px;
+    background-color: var(--bnpt-card-border);
+}
+.wf-step { position: relative; padding-bottom: 1.6rem; }
+.wf-step:last-child { padding-bottom: 0; }
+.wf-step .wf-dot {
+    position: absolute; left: -42px; top: 0; width: 32px; height: 32px; border-radius: 50%;
+    background-color: #1f2937; border: 2px solid var(--bnpt-card-border);
+    display: flex; align-items: center; justify-content: center; font-size: .78rem; font-weight: 700; color: var(--bnpt-text-muted);
+    z-index: 1;
+}
+.wf-step.done .wf-dot { background-color: var(--bnpt-accent-blue); border-color: var(--bnpt-accent-blue); color: #fff; }
+.wf-step.current .wf-dot { background-color: var(--bnpt-accent-warning); border-color: var(--bnpt-accent-warning); color: #1f2937; box-shadow: 0 0 0 4px rgba(245,158,11,.2); }
+.wf-step .wf-label { font-weight: 600; color: #fff; font-size: .9rem; }
+.wf-step.current .wf-label { color: var(--bnpt-accent-warning); }
+.wf-step .wf-sub { font-size: .76rem; color: var(--bnpt-text-muted); }
+
+.wf-retry-badge {
+    display: inline-flex; align-items: center; gap: 6px; font-size: .72rem;
+    background: rgba(239,68,68,.1); border: 1px solid rgba(239,68,68,.35); color: #f87171;
+    padding: 3px 10px; border-radius: 50rem; margin-top: 4px;
+}
+
+/* ---- Principle / info box ---- */
+.principle-box {
+    background-color: #0d1a33;
+    border: 1px solid rgba(59,130,246,.35);
+    border-radius: 8px;
+    padding: 1rem 1.1rem;
+    display: flex; gap: .8rem; align-items: flex-start;
+}
+.principle-box .principle-icon { font-size: 1.4rem; color: var(--bnpt-accent-blue); flex: 0 0 auto; }
+.principle-box .principle-title { color: #fff; font-weight: 700; font-size: .88rem; margin-bottom: .25rem; }
+.principle-box .principle-text { color: var(--bnpt-text-muted); font-size: .8rem; line-height: 1.5; }
+
+/* ---- Login page ---- */
+.login-page { background-color: var(--bnpt-bg); display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+.login-box { width: 380px; padding: 1rem; }
+.login-card-body { padding: 1.5rem; }
+.input-group-text { border-color: var(--bnpt-card-border); color: var(--bnpt-text-muted); }

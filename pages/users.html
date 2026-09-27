@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark" data-lte-color-mode="off">
+<head>
+  <meta charset="UTF-8" />
+  <title>User Management & Permissions | BNPT IPDR</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/styles/overlayscrollbars.min.css" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" crossorigin="anonymous" />
+  <link rel="stylesheet" href="../css/adminlte.min.css" />
+  <link rel="stylesheet" href="../css/bnpt-theme.css" />
+  
+</head>
+<body class="layout-fixed sidebar-expand-lg">
+  <div class="app-wrapper">
+    <div id="app-header-slot"></div>
+    <div id="app-sidebar-slot"></div>
+
+    <main class="app-main">
+      <div class="app-content-header">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-6">
+              <h1 class="mb-0 fs-3">User Management & Permissions</h1>
+            </div>
+            <div class="col-sm-6">
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb float-sm-end">
+                  <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">User Management & Permissions</li>
+                </ol>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="app-content">
+        <div class="container-fluid py-3">
+
+          <div class="card mb-3">
+            <div class="card-body d-flex flex-wrap justify-content-between align-items-center gap-3">
+              <div>
+                <h6 class="fw-bold mb-1">Daftar Pengguna</h6>
+                <p class="text-secondary fs-13 mb-0">Kelola akun pengguna beserta role dan hak akses per halaman/aksi.</p>
+              </div>
+              <!-- <button class="btn btn-primary" data-permission="users.create" data-bs-toggle="modal" data-bs-target="#addUserModal">
+                <i class="bi bi-person-plus-fill me-1"></i> Add User
+              </button> -->
+              <button class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#addUserModal">
+                <i class="bi bi-person-plus-fill me-1"></i> Add User
+              </button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table align-middle mb-0">
+                  <thead>
+                    <tr><th>Name</th><th>Username</th><th>Role</th><th>Status</th><th class="text-end">Actions</th></tr>
+                  </thead>
+                  <tbody id="user-table-body"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="app-footer">
+        <strong>BNPT IPDR Vector Filtering Engine &copy; 2026.</strong> Built on AdminLTE 4.
+      </footer>
+    </main>
+  </div>
+
+  <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1100;">
+    <div id="liveToast" class="toast align-items-center text-white" style="background-color: var(--bnpt-card-bg); border: 1px solid var(--bnpt-card-border);" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body d-flex align-items-center gap-2" id="toast-message"></div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: ADD USER -->
+  <div class="modal fade" id="addUserModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold"><i class="bi bi-person-plus-fill text-primary me-2"></i>Add New User</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <form id="addUserForm" onsubmit="handleAddUser(event)">
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label fs-13 text-secondary">Full Name</label>
+              <input type="text" class="form-control" id="inputUserName" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fs-13 text-secondary">Username / Email</label>
+              <input type="text" class="form-control" id="inputUsername" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fs-13 text-secondary">Temporary Password</label>
+              <input type="password" class="form-control" id="inputPassword" required>
+            </div>
+            <div class="mb-1">
+              <label class="form-label fs-13 text-secondary">Role</label>
+              <select class="form-select" id="inputRole">
+                <option value="Admin">Admin</option>
+                <option value="Checker">Checker</option>
+                <option value="Maker" selected>Maker</option>
+                <option value="Viewer">Viewer</option>
+              </select>
+              <small class="text-secondary fs-11">Role menentukan hak akses default. Bisa disesuaikan lagi lewat "Manage Permission".</small>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save User</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: MANAGE PERMISSION (per page x per action) -->
+  <div class="modal fade" id="permissionModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold"><i class="bi bi-shield-lock-fill text-warning me-2"></i>Manage Permission &mdash; <span id="permUserName" class="text-info"></span></h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p class="text-secondary fs-13">Atur hak akses per halaman dan per aksi (View / Create / Edit / Delete). Default mengikuti Role, tapi bisa di-override per user di sini.</p>
+          <div class="table-responsive">
+            <table class="table align-middle mb-0">
+              <thead>
+                <tr><th>Halaman</th><th class="text-center">View</th><th class="text-center">Create</th><th class="text-center">Edit</th><th class="text-center">Delete</th></tr>
+              </thead>
+              <tbody id="permission-matrix-body"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" onclick="savePermissions()">Save Permission</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/browser/overlayscrollbars.browser.es6.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+  <script src="../js/adminlte.min.js"></script>
+  <script>window.BNPT_PAGE = { key: 'users', depth: 1 };</script>
+  <script src="../js/layout.js"></script>
+  <script src="../js/permissions.js"></script>
+  
+  <script>
+    function showToast(msg) {
+      document.getElementById('toast-message').innerHTML = msg;
+      new bootstrap.Toast(document.getElementById('liveToast')).show();
+    }
+  </script>
+  <script>
+    const PAGES_LIST = [
+      { key: 'dashboard',    label: 'Dashboard' },
+      { key: 'whitelist',    label: 'MSISDN Whitelist Management' },
+      { key: 'change-mgmt',  label: 'Scheduled Change Management' },
+      { key: 'processing',   label: 'IPDR Processing Monitoring' },
+      { key: 'sftp',         label: 'SFTP Delivery Monitoring' },
+      { key: 'users',        label: 'User Management' }
+    ];
+    const ACTIONS = ['view', 'create', 'edit', 'delete'];
+
+    const ROLE_DEFAULT_PERMISSIONS = {
+      Admin:   PAGES_LIST.flatMap(p => ACTIONS.map(a => p.key + '.' + a)),
+      Checker: ['dashboard.view','whitelist.view','change-mgmt.view','change-mgmt.edit','processing.view','sftp.view'],
+      Maker:   ['dashboard.view','whitelist.view','whitelist.create','change-mgmt.view','change-mgmt.create','processing.view','sftp.view'],
+      Viewer:  ['dashboard.view','whitelist.view','change-mgmt.view','processing.view','sftp.view']
+    };
+
+    let users = [
+      { name: 'Ahmad Patel',  username: 'a.patel',      role: 'Admin',   status: 'ACTIVE', permissions: null },
+      { name: 'Budi Santoso', username: 'analyst_budi', role: 'Maker',   status: 'ACTIVE', permissions: null },
+      { name: 'Agus Wibowo',  username: 'supervisor_agus', role: 'Checker', status: 'ACTIVE', permissions: null },
+      { name: 'Siti Aminah',  username: 'analyst_siti', role: 'Viewer',  status: 'INACTIVE', permissions: null }
+    ];
+
+    document.addEventListener('bnpt:layout-ready', renderUserTable);
+    if (document.readyState !== 'loading') renderUserTable();
+
+    function roleBadge(role) {
+      const map = { Admin: 'primary', Checker: 'info', Maker: 'warning', Viewer: 'secondary' };
+      return `<span class="badge text-bg-${map[role]} bg-opacity-25 text-${map[role]} border border-${map[role]} border-opacity-25">${role}</span>`;
+    }
+
+    function statusBadge(status) {
+      return status === 'ACTIVE'
+        ? '<span class="badge text-bg-success bg-opacity-25 text-success">Active</span>'
+        : '<span class="badge text-bg-secondary bg-opacity-25 text-secondary">Inactive</span>';
+    }
+
+    function renderUserTable() {
+      const tbody = document.getElementById('user-table-body');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+      users.forEach((u, idx) => {
+        tbody.innerHTML += `<tr>
+            <td class="fw-bold text-white">${u.name}</td>
+            <td class="code-font text-secondary">${u.username}</td>
+            <td>${roleBadge(u.role)}</td>
+            <td>${statusBadge(u.status)}</td>
+            <td class="text-end">
+              <button class="btn btn-sm btn-outline-warning me-1" data-permission="users.edit" onclick="openPermissionModal(${idx})"><i class="bi bi-shield-lock"></i> Manage Permission</button>
+              <button class="btn btn-sm btn-outline-danger" data-permission="users.delete" onclick="toggleUserStatus(${idx})"><i class="bi bi-power"></i></button>
+            </td></tr>`;
+      });
+    }
+
+    function handleAddUser(e) {
+      e.preventDefault();
+      const name = document.getElementById('inputUserName').value;
+      const username = document.getElementById('inputUsername').value;
+      const role = document.getElementById('inputRole').value;
+      users.push({ name, username, role, status: 'ACTIVE', permissions: null });
+      renderUserTable();
+      bootstrap.Modal.getInstance(document.getElementById('addUserModal')).hide();
+      document.getElementById('addUserForm').reset();
+      showToast(`<i class="bi bi-check-circle-fill text-success"></i> User <b>${name}</b> berhasil ditambahkan dengan role ${role}.`);
+    }
+
+    function toggleUserStatus(idx) {
+      users[idx].status = users[idx].status === 'ACTIVE' ? 'INACTIVE' : 'ACTIVE';
+      renderUserTable();
+      showToast(`<i class="bi bi-info-circle-fill text-info"></i> Status user <b>${users[idx].name}</b> diubah menjadi ${users[idx].status}.`);
+    }
+
+    let currentPermUserIdx = null;
+
+    function openPermissionModal(idx) {
+      currentPermUserIdx = idx;
+      const user = users[idx];
+      document.getElementById('permUserName').innerText = user.name + ' (' + user.role + ')';
+      const activePerms = user.permissions || ROLE_DEFAULT_PERMISSIONS[user.role] || [];
+      const tbody = document.getElementById('permission-matrix-body');
+      tbody.innerHTML = PAGES_LIST.map(page => {
+        const cells = ACTIONS.map(action => {
+          const permKey = page.key + '.' + action;
+          const checked = activePerms.includes(permKey) ? 'checked' : '';
+          return `<td class="text-center"><input type="checkbox" class="form-check-input" data-perm="${permKey}" ${checked}></td>`;
+        }).join('');
+        return `<tr><td>${page.label}</td>${cells}</tr>`;
+      }).join('');
+      new bootstrap.Modal(document.getElementById('permissionModal')).show();
+    }
+
+    function savePermissions() {
+      const checkboxes = document.querySelectorAll('#permission-matrix-body input[data-perm]');
+      const selected = Array.from(checkboxes).filter(c => c.checked).map(c => c.dataset.perm);
+      users[currentPermUserIdx].permissions = selected;
+      bootstrap.Modal.getInstance(document.getElementById('permissionModal')).hide();
+      showToast(`<i class="bi bi-shield-check text-success"></i> Permission untuk <b>${users[currentPermUserIdx].name}</b> berhasil disimpan (${selected.length} akses aktif).`);
+    }
+  </script>
+</body>
+</html>

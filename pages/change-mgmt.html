@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark" data-lte-color-mode="off">
+<head>
+  <meta charset="UTF-8" />
+  <title>Scheduled and Controlled Whitelist Changes | BNPT IPDR</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/styles/overlayscrollbars.min.css" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" crossorigin="anonymous" />
+  <link rel="stylesheet" href="../css/adminlte.min.css" />
+  <link rel="stylesheet" href="../css/bnpt-theme.css" />
+  
+</head>
+<body class="layout-fixed sidebar-expand-lg">
+  <div class="app-wrapper">
+    <div id="app-header-slot"></div>
+    <div id="app-sidebar-slot"></div>
+
+    <main class="app-main">
+      <div class="app-content-header">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-6">
+              <h1 class="mb-0 fs-3">Scheduled and Controlled Whitelist Changes</h1>
+            </div>
+            <div class="col-sm-6">
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb float-sm-end">
+                  <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Scheduled and Controlled Whitelist Changes</li>
+                </ol>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="app-content">
+        <div class="container-fluid py-3">
+
+          <div class="row g-3">
+            <div class="col-lg-7">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h6 class="fw-bold mb-3">Alur Persetujuan (Approval Workflow)</h6>
+                  <div class="workflow-stepper">
+                    <div class="wf-step done"><div class="wf-dot"><i class="bi bi-check-lg"></i></div>
+                      <div class="wf-label">1. Draft</div><div class="wf-sub">Request dibuat oleh Maker</div></div>
+                    <div class="wf-step done"><div class="wf-dot"><i class="bi bi-check-lg"></i></div>
+                      <div class="wf-label">2. Submitted</div><div class="wf-sub">Menunggu review Checker</div></div>
+                    <div class="wf-step done"><div class="wf-dot"><i class="bi bi-check-lg"></i></div>
+                      <div class="wf-label">3. Under Review</div><div class="wf-sub">Validasi teknis &amp; legalitas</div>
+                      <div class="wf-retry-badge"><i class="bi bi-arrow-counterclockwise"></i> Rejection / Retry &rarr; kembali ke Draft</div></div>
+                    <div class="wf-step done"><div class="wf-dot"><i class="bi bi-check-lg"></i></div>
+                      <div class="wf-label">4. Approved</div><div class="wf-sub">Disetujui oleh Checker</div></div>
+                    <div class="wf-step current"><div class="wf-dot">5</div>
+                      <div class="wf-label">5. Scheduled <span class="badge text-bg-warning bg-opacity-25 text-warning ms-1">Current</span></div>
+                      <div class="wf-sub">Menunggu jadwal eksekusi otomatis</div></div>
+                    <div class="wf-step"><div class="wf-dot">6</div>
+                      <div class="wf-label">6. Applying</div><div class="wf-sub">Sinkronisasi ke sistem filtering</div></div>
+                    <div class="wf-step"><div class="wf-dot">7</div>
+                      <div class="wf-label">7. Active</div><div class="wf-sub">Whitelist berlaku pada stream IPDR</div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="card mb-3">
+                <div class="card-body">
+                  <h6 class="fw-bold mb-3">Detail Pekerjaan (Job Details)</h6>
+                  <div class="d-flex justify-content-between py-2 border-bottom" style="border-color: var(--bnpt-card-border) !important;"><span class="text-secondary fs-13">Request ID</span><span class="code-font fw-bold">WLR-20260923-0012</span></div>
+                  <div class="d-flex justify-content-between py-2 border-bottom" style="border-color: var(--bnpt-card-border) !important;"><span class="text-secondary fs-13">Perubahan</span><span class="text-info fw-medium">+ Add 12 MSISDN</span></div>
+                  <div class="d-flex justify-content-between py-2 border-bottom" style="border-color: var(--bnpt-card-border) !important;"><span class="text-secondary fs-13">Jadwal Eksekusi</span><span class="fw-bold text-white">24 Sep 2026, 09:00 WITA</span></div>
+                  <div class="d-flex justify-content-between py-2"><span class="text-secondary fs-13">Status Saat Ini</span><span class="badge text-bg-warning bg-opacity-25 text-warning">Scheduled</span></div>
+                </div>
+              </div>
+              <div class="principle-box">
+                <div class="principle-icon"><i class="bi bi-shield-fill-check"></i></div>
+                <div>
+                  <div class="principle-title">Prinsip Keamanan: Maker-Checker</div>
+                  <div class="principle-text">Setiap perubahan registrasi whitelist diproses melalui sistem kontrol otorisasi berlapis (maker-checker) untuk menjamin validitas, mencegah kesalahan konfigurasi, serta menjaga integritas keamanan jaringan telekomunikasi.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mt-3">
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table align-middle mb-0">
+                  <thead>
+                    <tr><th>Request ID</th><th>Perubahan</th><th>Jadwal Eksekusi</th><th>Status</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="code-font text-primary">WLR-20260923-0012</td><td>+ Add 12 MSISDN</td><td>24 Sep 2026, 09:00 WITA</td><td><span class="badge text-bg-warning bg-opacity-25 text-warning">Scheduled</span></td></tr>
+                    <tr><td class="code-font text-primary">WLR-20260922-0007</td><td>&minus; Remove 3 MSISDN</td><td>23 Sep 2026, 14:00 WITA</td><td><span class="badge text-bg-success bg-opacity-25 text-success">Active</span></td></tr>
+                    <tr><td class="code-font text-primary">WLR-20260921-0005</td><td>+ Add 5 MSISDN</td><td>&mdash;</td><td><span class="badge text-bg-secondary bg-opacity-25 text-secondary">Draft</span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="app-footer">
+        <strong>BNPT IPDR Vector Filtering Engine &copy; 2026.</strong> Built on AdminLTE 4.
+      </footer>
+    </main>
+  </div>
+
+
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/browser/overlayscrollbars.browser.es6.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+  <script src="../js/adminlte.min.js"></script>
+  <script>window.BNPT_PAGE = { key: 'change-mgmt', depth: 1 };</script>
+  <script src="../js/layout.js"></script>
+  <script src="../js/permissions.js"></script>
+  
+</body>
+</html>
